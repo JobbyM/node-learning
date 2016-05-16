@@ -1,5 +1,6 @@
 var child_process = require('child_process');
-var n = child_process.fork('./child2.js');
+console.log('__dirname:' + __dirname);
+var n = child_process.fork(__dirname + '/child2.js');
 n.on('message', function(m){
   console.log('PARENT got message:', m);
 });
