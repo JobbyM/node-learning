@@ -12,4 +12,13 @@ text.split(EOL).forEach(function(line){
   console.log(line);
 });
 
-fs.writeFileSync('test.js', 'HELLO NODE.js', 'utf8');
+// fs.writeFileSync('test.js', 'HELLO NODE.js', 'utf8');
+
+fs.exists('test.js', function(exists){
+  console.log(exists ? "It's there" : "no file!");
+});
+
+if(fs.exists(outputFolder)){
+  console.log('Removing ' + outputFolder);
+  fs.rmdir(outputFolder)
+}
