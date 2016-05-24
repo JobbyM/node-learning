@@ -27,6 +27,22 @@ if(fs.exists(outputFolder)){
   console.log(outputFolder + ' not exists!');
 }
 
-fs.mkdir('./helloDir', 0777, function(err){
+// fs.mkdir('./helloDir', 0777, function(err){
+//   if(err) throw err;
+// });
+
+// fs.writeFile('./helloDir/message.txt', 'Hello Node.js', function(err){
+//   if(err) throw err;
+//   console.log('文件写入成功');
+// });
+
+fs.readFile('./helloDir/message.txt', 'utf-8', function(err, data){
   if(err) throw err;
-})
+  console.log(data);
+});
+
+fs.readFile('./helloDir/message.txt', function(err, data){
+  if(err) throw err;
+  console.log(data);
+  console.log(data.toString());
+});
