@@ -18,7 +18,15 @@ fs.exists('test.js', function(exists){
   console.log(exists ? "It's there" : "no file!");
 });
 
+var outputFolder = './test';
+
 if(fs.exists(outputFolder)){
   console.log('Removing ' + outputFolder);
   fs.rmdir(outputFolder)
+}else{
+  console.log(outputFolder + ' not exists!');
 }
+
+fs.mkdir('./helloDir', 0777, function(err){
+  if(err) throw err;
+})
