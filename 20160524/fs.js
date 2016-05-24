@@ -10,4 +10,6 @@ var EOL = (process.platform === 'win32' ? '\r\n' : '\n');
 // text.split(/\r?\n/).forEach(function(line){
 text.split(EOL).forEach(function(line){
   console.log(line);
-})
+});
+
+fs.writeFileSync('test.js', 'HELLO NODE.js', 'utf8');
