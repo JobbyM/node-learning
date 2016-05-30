@@ -43,15 +43,47 @@ var fs = require('fs');
 //   });
 // });
 
-fs.writeFileSync('./testFile.txt','Hello world！Hello Node！');
+// fs.writeFileSync('./testFile.txt','Hello world！Hello Node！');
+//
+// fs.watchFile('./testFile.txt', function(curr, prev){
+//   console.log('the current mtime is : ' + curr.mtime);
+//   console.log('the previous mtime is : ' + prev.mtime);
+// });
+//
+// fs.writeFile('./testFile.txt', 'changed', function(err){
+//   if(err) throw err;
+//
+//   console.log('file write complete!');
+// });
 
-fs.watchFile('./testFile.txt', function(curr, prev){
-  console.log('the current mtime is : ' + curr.mtime);
-  console.log('the previous mtime is : ' + prev.mtime);
-});
+function readLines(input, func){
+  var remaining = '';
 
-fs.writeFile('./testFile.txt', 'changed', function(err){
-  if(err) throw err;
+  input.on('data', function(data){
+    remaining += data;
+    var index = remaining.indexOf(EOL);
+    var last = 0;
+    while(index > -1){
+      var line = remaining.substring(last, index);
+      last = index + 1;
+      func(line);
+      index = remaining.indexOf(EOL, last);
+    }
 
-  console.log('file write complete!');
-})
+    remaining = remaining.substring(last)
+  });
+
+  input.on('end', function(){
+    if(remaining.length > 0){
+      func(remaining);
+    }
+  });
+}
+
+function func(data){
+  console.log('Line: ' + data);
+}
+
+var EOL = (process.platform === 'win32' ? '\r\n' : '\n');
+var input = fs.createReadStream('lines.txt');
+readLines(input, func);
