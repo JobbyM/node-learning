@@ -87,3 +87,7 @@ function func(data){
 var EOL = (process.platform === 'win32' ? '\r\n' : '\n');
 var input = fs.createReadStream('lines.txt');
 readLines(input, func);
+
+var out = fs.createWriteStream(fileName, {encoding: 'utf8'});
+out.write(str);
+out.end();
