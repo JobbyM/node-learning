@@ -25,20 +25,33 @@ var fs = require('fs');
 //   });
 // });
 
-fs.readdir('/', function(err ,files){
+// fs.readdir('/', function(err ,files){
+//   if(err) throw err;
+//
+//   files.forEach(function(file){
+//     fs.stat('/' + file, function(err, stats){
+//       if(err) throw err;
+//
+//       if(stats.isFile()){
+//         console.log('%s is file', file);
+//       }
+//       else if(stats.isDirectory){
+//         console.log('%s is a directory', file);
+//       }
+//       console.log('stats: %s', JSON.stringify(stats));
+//     });
+//   });
+// });
+
+fs.writeFileSync('./testFile.txt','Hello world！Hello Node！');
+
+fs.watchFile('./testFile.txt', function(curr, prev){
+  console.log('the current mtime is : ' + curr.mtime);
+  console.log('the previous mtime is : ' + prev.mtime);
+});
+
+fs.writeFile('./testFile.txt', 'changed', function(err){
   if(err) throw err;
 
-  files.forEach(function(file){
-    fs.stat('/' + file, function(err, stats){
-      if(err) throw err;
-
-      if(stats.isFile()){
-        console.log('%s is file', file);
-      }
-      else if(stats.isDirectory){
-        console.log('%s is a directory', file);
-      }
-      console.log('stats: %s', JSON.stringify(stats));
-    });
-  });
-});
+  console.log('file write complete!');
+})
