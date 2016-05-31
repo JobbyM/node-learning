@@ -12,15 +12,18 @@
 
 // process.stdin.pipe(process.stdout)
 
-process.stdin.setEncoding('utf8');
+// process.stdin.setEncoding('utf8');
+//
+// process.stdin.on('readable', function(){
+//   var chunk = process.stdin.read();
+//   if(chunk !== null){
+//     process.stdout.write('data: ' + chunk);
+//   }
+// });
+//
+// process.stdin.on('end', function(){
+//   process.stdout.write('end')
+// });
 
-process.stdin.on('readable', function(){
-  var chunk = process.stdin.read();
-  if(chunk !== null){
-    process.stdout.write('data: ' + chunk);
-  }
-});
-
-process.stdin.on('end', function(){
-  process.stdout.write('end')
-});
+// node --harmony app2.js --version
+console.log(process.execArgv); // [ '--harmony']
