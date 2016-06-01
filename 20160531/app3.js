@@ -14,3 +14,6 @@ process.on('uncaughtException', function(err){
 setTimeout(function(){
   console.log('本行依然执行');
 },500)
+
+process.on('exit', code =>
+  console.log('exiting with code: ' + code))
