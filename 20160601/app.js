@@ -9,12 +9,15 @@ readableStream.setEncoding('utf8');
 //   data += chunk;
 // });
 
-readableStream.on('readable',function(){
-  while((chunk=readableStream.read())!==null){
-    data += chunk;
-  }
-});
+// readableStream.on('readable',function(){
+//   while((chunk=readableStream.read())!==null){
+//     data += chunk;
+//   }
+// });
+
+readableStream.resume();
 
 readableStream.on('end', function(){
-  console.log(data);
+  // console.log(data);
+  console.log('数据流到达尾部，未读取任何任务数据');
 });
