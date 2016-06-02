@@ -15,8 +15,15 @@ var assert = require('assert');
 
 var writer = fs.createWriteStream('write.txt');
 var reader = fs.createReadStream('wow.txt');
-writer.on('pipe',function(src){
-  console.error('something is piping into the writer');
-  assert.equal(src, reader);
+// writer.on('pipe',function(src){
+//   console.error('something is piping into the writer');
+//   assert.equal(src, reader);
+// });
+// reader.pipe(writer);
+
+writer.on('unpipe', function(src){
+  console.error('something has stopped piping into the writer');
+  assert.equal(src,reader);
 });
 reader.pipe(writer);
+reader.unpipe(writer);
