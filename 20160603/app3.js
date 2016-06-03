@@ -11,4 +11,12 @@ function bar(){
   console.log('end');
 }
 
-bar();
+// bar();
+
+var connection = function(id){
+  console.log('client id: ' + id);
+}
+
+foo.on('connection', connection);
+
+foo.emit('connection', 6);
