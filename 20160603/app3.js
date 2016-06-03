@@ -1,22 +1,38 @@
 var EventEmitter = require('events').EventEmitter;
-var foo = new EventEmitter();
+var foo = new EventEmitter(); 
+//
+// foo.on('someEvent',function(){
+//   console.log('event has occured');
+// });
+//
+// function bar(){
+//   console.log('start');
+//   foo.emit('someEvent');
+//   console.log('end');
+// }
+//
+// // bar();
+//
+// var connection = function(id){
+//   console.log('client id: ' + id);
+// }
+//
+// foo.on('connection', connection);
+//
+// foo.emit('connection', 6);
 
-foo.on('someEvent',function(){
-  console.log('event has occured');
+foo.on('connection', baz);
+
+
+foo.on('newListener', function(evtName){
+  console.log('New Listener: ' + evtName);
 });
 
-function bar(){
-  console.log('start');
-  foo.emit('someEvent');
-  console.log('end');
-}
+foo.on('removeListener', function(evtName){
+  console.log('Removed Listener: ' + evtName);
+});
 
-// bar();
+function baz(){}
 
-var connection = function(id){
-  console.log('client id: ' + id);
-}
-
-foo.on('connection', connection);
-
-foo.emit('connection', 6);
+foo.on('save-user', baz);
+foo.removeListener('save-user',baz);
