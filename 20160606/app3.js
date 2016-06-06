@@ -33,3 +33,13 @@ assert.throws(
   },
   '不符合预期的错误类型'
 )
+
+function sayHello(name, callback){
+  var error = false;
+  var str = 'Hello ' + name;
+  callback(error, str)
+}
+
+sayHello('world',function(err, value){
+  assert.ifError(err);
+})
