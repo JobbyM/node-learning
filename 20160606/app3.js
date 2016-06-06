@@ -43,3 +43,10 @@ function sayHello(name, callback){
 sayHello('world',function(err, value){
   assert.ifError(err);
 })
+
+assert.fail(42, 24, 'Test Failed', '###')
+// AssertionError: Test Failed
+assert.fail(42, 42, 'Test Failed', '###')
+// AssertionError: Test Failed
+assert.fail(42, 24, undefined, '###')
+// AssertionError: 42 ### 24
