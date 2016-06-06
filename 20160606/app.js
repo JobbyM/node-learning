@@ -6,5 +6,7 @@ function add(a, b){
 
 var expected = add(1, 2);
 
-assert( expected === 3, '预期结果为3')
-assert( expected === 4, '预期结果为4')
+// 以下三句效果相同
+assert( expected == 3, '预期结果为3')
+assert.ok( expected == 3, '预期结果为4')
+assert.equal( expected , 3, '预期结果为4')
