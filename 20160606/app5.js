@@ -5,9 +5,27 @@ var Router = require('koa-router');
 
 var myRouter = new Router();
 
-myRouter.get('/',function* (){
-  this.response.body = 'Hello World!'
-})
+// myRouter.get('/',function* (){
+//   this.response.body = 'Hello World!'
+// })
+
+// // /programming/how-to-node
+// myRouter.get('/:category/:title', function* (next){
+//   console.log(this.params);
+//   // { category: 'programming', title: 'how-to-node' }
+//   this.response.body = 'Hello World!'
+// })
+
+myRouter
+  .get('/users/:user', function* (next){
+    this.body = this.user;
+  })
+  .param('user', function* (id, next){
+    var users = ['0号用户','1号用户','2号用户']
+    this.user = users[id];
+    if(!this.user) return this.status = 404;
+    yield next;
+  })
 
 app.use(myRouter.routes())
 // app.use(function* (next){
